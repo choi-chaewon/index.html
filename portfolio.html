@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Choi Chaewon — Portfolio</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f5f4f2;--surface:#eeede9;--border:#d8d6d0;
+  --muted:#aaa9a4;--sub:#777672;--body:#4a4945;
+  --heading:#1a1917;--accent:#2a2926;
+  --ff:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--body);font-family:var(--ff);font-weight:400;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 3rem;border-bottom:1px solid transparent;transition:border-color .4s,background .4s}
+nav.scrolled{background:rgba(245,244,242,.95);border-color:var(--border);backdrop-filter:blur(16px)}
+.nav-logo{font-size:.8rem;font-weight:600;letter-spacing:.12em;color:var(--accent);text-decoration:none;text-transform:uppercase}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-size:.72rem;font-weight:500;letter-spacing:.1em;color:var(--sub);text-decoration:none;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--accent)}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 3rem 5rem;position:relative;overflow:hidden}
+.hero-noise{position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.hero-label{font-size:.7rem;font-weight:500;color:var(--muted);letter-spacing:.2em;text-transform:uppercase;margin-bottom:1.5rem;position:relative;z-index:1;opacity:0;transform:translateY(12px);animation:fadeUp .8s .3s forwards}
+.hero-name-wrap{display:flex;gap:.3em;align-items:baseline;flex-wrap:wrap;position:relative;z-index:1;opacity:0;transform:translateY(20px);animation:fadeUp .9s .5s forwards;user-select:none}
+.hero-word{font-weight:600;font-size:clamp(3.8rem,9vw,8.5rem);color:var(--heading);line-height:.95;letter-spacing:-.03em;display:inline-block;transition:transform .4s cubic-bezier(.22,1,.36,1);cursor:default}
+.hero-word.it{font-weight:400;font-style:italic;color:var(--sub)}
+.hero-word:hover{transform:translateY(-14px)}
+.hero-meta{margin-top:2.5rem;display:flex;align-items:flex-end;justify-content:space-between;position:relative;z-index:1;opacity:0;animation:fadeUp .9s .75s forwards}
+.hero-desc{max-width:380px;font-size:.93rem;font-weight:400;color:var(--sub);line-height:1.85}
+.hero-scroll{font-size:.65rem;font-weight:500;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:.5rem}
+.scroll-line{width:1px;height:52px;background:linear-gradient(to bottom,var(--muted),transparent);animation:spulse 2s infinite}
+@keyframes spulse{0%,100%{opacity:.25}50%{opacity:1}}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+
+/* SHARED */
+.divider{border:none;border-top:1px solid var(--border);margin:0 3rem}
+section{padding:7rem 3rem;min-height:100vh;display:flex;flex-direction:column;justify-content:center}
+.sec-label{font-size:.65rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);margin-bottom:2.8rem;display:flex;align-items:center;gap:1rem;cursor:pointer}
+.sec-label::after{content:'';display:block;height:1px;width:38px;background:var(--border)}
+h2{font-weight:600;font-size:clamp(2rem,4vw,3rem);color:var(--heading);line-height:1.12;letter-spacing:-.025em}
+
+/* ABOUT */
+.strengths-block{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:2.4rem 2.8rem;position:relative;overflow:hidden;margin-bottom:1.5rem}
+.strengths-block::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent)}
+.about-block-label{font-size:.62rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:.7rem}
+.about-block-label::after{content:'';display:block;height:1px;width:28px;background:var(--border)}
+.strengths-text{font-size:1.05rem;font-weight:400;color:var(--body);line-height:1.85;font-style:italic}
+.about-bottom-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.interests-block{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:2.2rem 2.4rem}
+.interests-cols{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:1.4rem}
+.interest-group-label{font-size:.6rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:.9rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.interest-list{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.interest-list li{font-size:.88rem;color:var(--body);display:flex;align-items:center;gap:.55rem}
+.interest-list li::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--muted);flex-shrink:0}
+.dream-block{background:var(--heading);border-radius:14px;padding:2.2rem 2.4rem}
+.dream-block .about-block-label{color:rgba(245,244,242,.4)}
+.dream-block .about-block-label::after{background:rgba(245,244,242,.15)}
+.dream-companies{display:flex;flex-direction:column;gap:.9rem;margin-top:1.4rem}
+.dream-company{display:flex;align-items:center;justify-content:space-between;padding:.95rem 1.2rem;border:1px solid rgba(245,244,242,.1);border-radius:8px;background:rgba(245,244,242,.04);transition:background .2s;cursor:default}
+.dream-company:hover{background:rgba(245,244,242,.09)}
+.dream-company-name{font-size:.95rem;font-weight:400;color:#f5f4f2}
+.dream-company-arrow{font-size:.75rem;color:rgba(245,244,242,.3)}
+
+/* WORK */
+.work-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:2.5rem}
+.work-count{font-size:.68rem;font-weight:500;letter-spacing:.1em;color:var(--muted)}
+.work-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.proj-card{position:relative;overflow:hidden;border-radius:12px;cursor:pointer;border:1px solid var(--border);background:var(--surface);aspect-ratio:3/2}
+.proj-card .thumb{width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s cubic-bezier(.22,1,.36,1),filter .4s}
+.proj-card .thumb-empty{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.9rem;transition:background .3s}
+.thumb-empty svg{opacity:.2}
+.thumb-empty span{font-size:.62rem;font-weight:500;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+.proj-card:hover .thumb{transform:scale(1.05);filter:brightness(.87)}
+.proj-card:hover .thumb-empty{background:#e4e2dd}
+.proj-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(20,19,17,.84) 0%,transparent 60%);opacity:0;transition:opacity .35s;display:flex;flex-direction:column;justify-content:flex-end;padding:1.8rem 2rem}
+.proj-card:hover .proj-overlay{opacity:1}
+.ov-num{font-size:.58rem;font-weight:500;letter-spacing:.22em;color:rgba(245,244,242,.45);margin-bottom:.35rem;text-transform:uppercase}
+.ov-title{font-weight:600;font-size:1.25rem;color:#f5f4f2;line-height:1.1;margin-bottom:.6rem}
+.ov-tags{display:flex;flex-wrap:wrap;gap:.3rem}
+.ov-tag{font-size:.58rem;font-weight:500;color:rgba(245,244,242,.5);border:1px solid rgba(245,244,242,.2);padding:.18rem .5rem;border-radius:3px;text-transform:uppercase}
+.ov-cta{position:absolute;top:1rem;right:1rem;font-size:.6rem;font-weight:500;letter-spacing:.1em;color:rgba(245,244,242,.7);background:rgba(20,19,17,.4);padding:.28rem .7rem;border-radius:4px;text-transform:uppercase;opacity:0;transition:opacity .3s}
+.proj-card:hover .ov-cta{opacity:1}
+
+/* TOOLS */
+#tools{background:var(--surface)}
+.tools-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;margin-top:3rem}
+.tool-card{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:1.8rem 1.6rem;transition:transform .25s,box-shadow .25s}
+.tool-card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,.09)}
+.tool-icon{width:52px;height:52px;margin-bottom:1.1rem;border-radius:9px;overflow:hidden}
+.tool-icon svg{width:100%;height:100%;display:block}
+.tool-name{font-weight:600;font-size:.92rem;color:var(--heading);margin-bottom:.35rem}
+.tool-desc{font-size:.78rem;color:var(--muted);line-height:1.6}
+
+/* CONTACT */
+#contact{text-align:center}
+.contact-inner{max-width:580px;margin:0 auto}
+.contact-sub{font-size:.92rem;color:var(--sub);margin-bottom:2.4rem;margin-top:.8rem}
+.contact-email{font-weight:400;font-style:italic;font-size:clamp(.85rem,1.5vw,1.1rem);color:var(--heading);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:.3rem;transition:border-color .2s,color .2s;display:inline-block;margin-bottom:2.4rem}
+.contact-email:hover{border-color:var(--sub);color:var(--accent)}
+.social-links{display:flex;justify-content:center;gap:2.5rem}
+.social-links a{font-size:.72rem;font-weight:500;letter-spacing:.12em;color:var(--muted);text-decoration:none;text-transform:uppercase;transition:color .2s}
+.social-links a:hover{color:var(--accent)}
+
+/* FOOTER */
+footer{padding:1.8rem 3rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+footer span{font-size:.63rem;color:var(--muted)}
+
+/* PROJECT PAGE */
+#pp{position:fixed;inset:0;z-index:400;background:var(--bg);overflow-y:auto;transform:translateY(100%);transition:transform .55s cubic-bezier(.22,1,.36,1)}
+#pp.open{transform:translateY(0)}
+.pp-nav{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 3rem;background:rgba(245,244,242,.95);border-bottom:1px solid var(--border);backdrop-filter:blur(14px)}
+.pp-back{display:flex;align-items:center;gap:.6rem;font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--sub);background:none;border:none;cursor:pointer;transition:color .2s;font-family:var(--ff)}
+.pp-back:hover{color:var(--heading)}
+.pp-back svg{transition:transform .2s}
+.pp-back:hover svg{transform:translateX(-3px)}
+.pp-nav-title{font-size:.7rem;font-weight:500;color:var(--muted)}
+.pp-hero-area{width:100%;height:clamp(280px,50vh,560px);position:relative;overflow:hidden;background:var(--surface)}
+.pp-hero-area img{width:100%;height:100%;object-fit:cover;display:none}
+.pp-hero-area img.on{display:block}
+.pp-hero-empty{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;cursor:pointer;position:relative;transition:background .3s}
+.pp-hero-empty:hover{background:#e8e6e1}
+.pp-hero-empty svg{opacity:.22}
+.pp-hero-empty p{font-size:.7rem;font-weight:500;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+.pp-hero-input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.pp-body{max-width:840px;margin:0 auto;padding:4rem 3rem 6rem}
+.pp-meta{display:flex;align-items:flex-start;justify-content:space-between;gap:2rem;margin-bottom:3.5rem;padding-bottom:3rem;border-bottom:1px solid var(--border)}
+.pp-num{font-size:.65rem;font-weight:600;letter-spacing:.22em;color:var(--muted);text-transform:uppercase;margin-bottom:.7rem}
+.pp-title{font-weight:600;font-size:clamp(1.8rem,3.5vw,2.6rem);color:var(--heading);line-height:1.1;letter-spacing:-.02em;margin-bottom:1rem}
+.pp-tags{display:flex;flex-wrap:wrap;gap:.35rem}
+.pp-tag{font-size:.62rem;font-weight:500;letter-spacing:.08em;color:var(--muted);border:1px solid var(--border);padding:.22rem .55rem;border-radius:3px;text-transform:uppercase}
+.pp-side{flex-shrink:0;display:flex;flex-direction:column;gap:1rem;min-width:150px}
+.pp-info{display:flex;flex-direction:column;gap:.15rem}
+.pp-info-label{font-size:.62rem;font-weight:600;letter-spacing:.15em;color:var(--muted);text-transform:uppercase}
+.pp-info-val{font-size:.88rem;color:var(--body)}
+.pp-sec{margin-bottom:3.5rem}
+.pp-sec-title{font-size:.66rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:1.4rem;display:flex;align-items:center;gap:.8rem}
+.pp-sec-title::after{content:'';display:block;height:1px;flex:1;background:var(--border)}
+.pp-overview{font-size:.95rem;color:var(--body);line-height:1.9}
+.doc-drop{display:flex;align-items:center;gap:.8rem;padding:1.4rem 1.8rem;border:2px dashed var(--border);border-radius:10px;cursor:pointer;position:relative;transition:border-color .25s,background .25s;background:none;width:100%;text-align:left;margin-bottom:1.2rem;font-family:var(--ff)}
+.doc-drop:hover{border-color:var(--sub);background:var(--surface)}
+.doc-drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.doc-drop-icon{width:38px;height:38px;background:var(--surface);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid var(--border)}
+.doc-drop-text strong{font-size:.88rem;font-weight:600;color:var(--heading);display:block;margin-bottom:.15rem}
+.doc-drop-text small{font-size:.65rem;color:var(--muted)}
+.doc-item{display:flex;align-items:center;gap:1rem;padding:1.1rem 1.4rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-bottom:.8rem}
+.doc-icon{width:36px;height:36px;border-radius:7px;background:var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.doc-name{font-size:.88rem;font-weight:500;color:var(--heading);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0}
+.doc-size{font-size:.62rem;color:var(--muted);white-space:nowrap}
+.doc-del{background:none;border:none;cursor:pointer;color:var(--muted);padding:.3rem;border-radius:4px;transition:color .2s,background .2s;flex-shrink:0}
+.doc-del:hover{color:var(--heading);background:var(--border)}
+.pp-gallery{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.2rem}
+.gal-item{aspect-ratio:4/3;border-radius:8px;overflow:hidden;background:var(--surface);border:1px solid var(--border);position:relative}
+.gal-item img{width:100%;height:100%;object-fit:cover;display:none}
+.gal-item img.on{display:block}
+.gal-add{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;width:100%;height:100%;border:2px dashed var(--border);border-radius:8px;position:relative;transition:background .2s;cursor:pointer}
+.gal-add:hover{background:var(--surface)}
+.gal-add svg{opacity:.22}
+.gal-add span{font-size:.6rem;font-weight:500;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+.gal-add input{position:absolute;inset:0;opacity:0;cursor:pointer}
+
+/* TOAST */
+#toast{position:fixed;bottom:2rem;right:2rem;z-index:9999;background:var(--accent);color:var(--bg);font-size:.7rem;font-weight:500;padding:.7rem 1.2rem;border-radius:6px;opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s;pointer-events:none}
+#toast.on{opacity:1;transform:translateY(0)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* RESPONSIVE */
+@media(max-width:960px){.tools-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){
+  nav,.pp-nav{padding:1.2rem 1.5rem}
+  .nav-links{display:none}
+  section{padding:5rem 1.5rem;min-height:100vh}
+  #hero{padding:0 1.5rem 3.5rem;min-height:100vh}
+  .divider{margin:0 1.5rem}
+  .about-bottom-grid,.work-grid,.pp-gallery{grid-template-columns:1fr}
+  footer{flex-direction:column;gap:.8rem;text-align:center;padding:1.5rem}
+  .pp-body{padding:2.5rem 1.5rem 5rem}
+  .pp-meta{flex-direction:column;gap:1.5rem}
+}
+@media(max-width:520px){.tools-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#hero" class="nav-logo">Portfolio</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-noise"></div>
+  <div class="hero-label">Introduction</div>
+  <div class="hero-name-wrap" id="heroName">
+    <span class="hero-word" data-msg="Hello!">Choi</span>
+    <span class="hero-word it" data-msg="Chaewon here">Chaewon</span>
+  </div>
+  <div class="hero-meta">
+    <p class="hero-desc">Designer &middot; Seoul<br>Creating visuals through illustration and motion.</p>
+    <div class="hero-scroll"><span>Scroll</span><div class="scroll-line"></div></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sec-label">About</div>
+  <div class="strengths-block reveal">
+    <div class="about-block-label">Strengths</div>
+    <p class="strengths-text">"I have the ability to shift perspectives and propose new directions when developing ideas or when facing creative challenges."</p>
+  </div>
+  <div class="about-bottom-grid">
+    <div class="interests-block reveal">
+      <div class="about-block-label">Interests</div>
+      <div class="interests-cols">
+        <div>
+          <div class="interest-group-label">Design</div>
+          <ul class="interest-list">
+            <li>Motion Graphics</li><li>Character Design</li><li>Animation</li><li>3D</li>
+          </ul>
+        </div>
+        <div>
+          <div class="interest-group-label">Others</div>
+          <ul class="interest-list">
+            <li>K-pop</li><li>Sports</li><li>Movies</li><li>Music</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="dream-block reveal">
+      <div class="about-block-label">Dream Companies</div>
+      <div class="dream-companies">
+        <div class="dream-company"><span class="dream-company-name">SAMG Entertainment</span><span class="dream-company-arrow">&#10022;</span></div>
+        <div class="dream-company"><span class="dream-company-name">SM Entertainment</span><span class="dream-company-arrow">&#10022;</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- WORK -->
+<section id="work">
+  <div class="sec-label">Work</div>
+  <div class="work-header"><h2>Work</h2><span class="work-count">4 Projects</span></div>
+  <div class="work-grid">
+    <div class="proj-card reveal" data-id="0" tabindex="0" role="button">
+      <div class="thumb-empty" id="ce0"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Click to open</span></div>
+      <img class="thumb" id="ct0" alt="">
+      <div class="proj-overlay"><div class="ov-num">Project 01</div><div class="ov-title" id="ot0">Project Name A</div><div class="ov-tags"><span class="ov-tag">Illustrator</span><span class="ov-tag">Photoshop</span></div></div>
+      <div class="ov-cta">View &rarr;</div>
+    </div>
+    <div class="proj-card reveal" data-id="1" tabindex="0" role="button">
+      <div class="thumb-empty" id="ce1"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Click to open</span></div>
+      <img class="thumb" id="ct1" alt="">
+      <div class="proj-overlay"><div class="ov-num">Project 02</div><div class="ov-title" id="ot1">Project Name B</div><div class="ov-tags"><span class="ov-tag">After Effects</span><span class="ov-tag">Motion</span></div></div>
+      <div class="ov-cta">View &rarr;</div>
+    </div>
+    <div class="proj-card reveal" data-id="2" tabindex="0" role="button">
+      <div class="thumb-empty" id="ce2"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Click to open</span></div>
+      <img class="thumb" id="ct2" alt="">
+      <div class="proj-overlay"><div class="ov-num">Project 03</div><div class="ov-title" id="ot2">Project Name C</div><div class="ov-tags"><span class="ov-tag">Clip Studio</span><span class="ov-tag">Illustration</span></div></div>
+      <div class="ov-cta">View &rarr;</div>
+    </div>
+    <div class="proj-card reveal" data-id="3" tabindex="0" role="button">
+      <div class="thumb-empty" id="ce3"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Click to open</span></div>
+      <img class="thumb" id="ct3" alt="">
+      <div class="proj-overlay"><div class="ov-num">Project 04</div><div class="ov-title" id="ot3">Project Name D</div><div class="ov-tags"><span class="ov-tag">Photoshop</span><span class="ov-tag">Retouching</span></div></div>
+      <div class="ov-cta">View &rarr;</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- TOOLS -->
+<section id="tools">
+  <div class="sec-label">Tools</div>
+  <h2>Tools I Use</h2>
+  <div class="tools-grid">
+    <div class="tool-card reveal">
+      <div class="tool-icon"><svg viewBox="0 0 54 54" fill="none"><rect width="54" height="54" rx="11" fill="#FF9A00"/><path d="M15 38L23 16H31L39 38H32.5L31 32H23L21.5 38H15ZM25 27H29L27 21L25 27Z" fill="white"/></svg></div>
+      <div class="tool-name">Adobe Illustrator</div><div class="tool-desc">Vector graphics, logo &amp; icon design</div>
+    </div>
+    <div class="tool-card reveal">
+      <div class="tool-icon"><svg viewBox="0 0 54 54" fill="none"><rect width="54" height="54" rx="11" fill="#31A8FF"/><path d="M16 38V16H24C28.4 16 32 19.6 32 24C32 28.4 28.4 32 24 32H21V38H16ZM21 27H24C25.7 27 27 25.7 27 24C27 22.3 25.7 21 24 21H21V27Z" fill="white"/><path d="M34 30C34 27.2 36.2 25 39 25V20C33.5 20 29 24.5 29 30C29 35.5 33.5 40 39 40V35C36.2 35 34 32.8 34 30Z" fill="white"/></svg></div>
+      <div class="tool-name">Adobe Photoshop</div><div class="tool-desc">Image editing, compositing &amp; retouching</div>
+    </div>
+    <div class="tool-card reveal">
+      <div class="tool-icon"><svg viewBox="0 0 54 54" fill="none"><rect width="54" height="54" rx="11" fill="#9999FF"/><path d="M13 38V16H18V25L25 16H31L23.5 27L32 38H26L20 28.5L18 31V38H13Z" fill="white"/><path d="M33 31C33 28.8 34.8 27 37 27H41V22C35.5 22 31 26.5 31 32C31 37.5 35.5 42 41 42V37C38.2 37 33 34.5 33 31Z" fill="white"/></svg></div>
+      <div class="tool-name">Adobe After Effects</div><div class="tool-desc">Motion graphics, VFX &amp; compositing</div>
+    </div>
+    <div class="tool-card reveal">
+      <div class="tool-icon"><svg viewBox="0 0 54 54" fill="none"><rect width="54" height="54" rx="11" fill="#2a2a2a"/><path d="M27 9L35 22H30V35C30 37.8 28.5 40 27 40C25.5 40 24 37.8 24 35V22H19L27 9Z" fill="white" opacity=".95"/><circle cx="27" cy="35" r="2.5" fill="#2a2a2a"/><rect x="23.5" y="42" width="7" height="2" rx="1" fill="#666"/></svg></div>
+      <div class="tool-name">Clip Studio Paint</div><div class="tool-desc">Digital illustration, comics &amp; animation</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="sec-label" style="justify-content:center">Contact</div>
+    <h2 class="reveal">Let's work together.</h2>
+    <p class="contact-sub reveal">Open to new opportunities, collaborations, or just a hello.</p>
+    <a href="mailto:chae2@soomyung.ac.kr" class="contact-email reveal">chae2@soomyung.ac.kr</a>
+    <div class="social-links reveal">
+      <a href="https://www.instagram.com/mlie_1on" target="_blank" rel="noopener">&#64;mlie_1on</a>
+      <a href="tel:010-4232-1206">010&#8209;4232&#8209;1206</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>&copy; 2026 Choi Chaewon. All rights reserved.</span>
+  <span id="fegg">Portfolio &mdash; Choi Chaewon</span>
+</footer>
+
+<!-- PROJECT DETAIL PAGE -->
+<div id="pp">
+  <nav class="pp-nav">
+    <button class="pp-back" id="ppBack"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Back to Work</button>
+    <span class="pp-nav-title" id="ppNavTitle">Project</span>
+  </nav>
+  <div class="pp-hero-area">
+    <div class="pp-hero-empty" id="ppHeroEmpty">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <p>Upload Hero Image</p>
+      <input class="pp-hero-input" type="file" accept="image/*" id="ppHeroInput">
+    </div>
+    <img id="ppHeroImg" alt="">
+  </div>
+  <div class="pp-body">
+    <div class="pp-meta">
+      <div>
+        <div class="pp-num" id="ppNum">Project 01</div>
+        <h1 class="pp-title" id="ppTitle">Project Name A</h1>
+        <div class="pp-tags" id="ppTags"><span class="pp-tag">Illustrator</span></div>
+      </div>
+      <div class="pp-side">
+        <div class="pp-info"><span class="pp-info-label">Year</span><span class="pp-info-val" id="ppYear">2024</span></div>
+        <div class="pp-info"><span class="pp-info-label">Category</span><span class="pp-info-val" id="ppCat">Illustration</span></div>
+      </div>
+    </div>
+    <div class="pp-sec">
+      <div class="pp-sec-title">Overview</div>
+      <p class="pp-overview" id="ppOverview">Write your project overview here.</p>
+    </div>
+    <div class="pp-sec">
+      <div class="pp-sec-title">Images</div>
+      <div class="pp-gallery" id="ppGallery"></div>
+    </div>
+    <div class="pp-sec">
+      <div class="pp-sec-title">Proposal &amp; Documents</div>
+      <div id="ppDocs"></div>
+      <label class="doc-drop">
+        <input type="file" accept=".pdf,.pptx,.ppt,.docx,.doc,.key,.png,.jpg,.jpeg" multiple id="ppDocInput">
+        <div class="doc-drop-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+        <div class="doc-drop-text"><strong>Upload Proposal / Documents</strong><small>PDF, PPT, DOCX, Key, Image supported</small></div>
+      </label>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+!function(){
+  'use strict';
+
+  /* ── data ── */
+  var P=[
+    {num:'Project 01',title:'Project Name A',tags:['Illustrator','Photoshop'],  year:'2024',cat:'Illustration',overview:'Write your project A overview here.',thumb:null,hero:null,gallery:[],docs:[]},
+    {num:'Project 02',title:'Project Name B',tags:['After Effects','Motion'],    year:'2024',cat:'Motion',      overview:'Write your project B overview here.',thumb:null,hero:null,gallery:[],docs:[]},
+    {num:'Project 03',title:'Project Name C',tags:['Clip Studio','Illustration'],year:'2024',cat:'Comic',       overview:'Write your project C overview here.',thumb:null,hero:null,gallery:[],docs:[]},
+    {num:'Project 04',title:'Project Name D',tags:['Photoshop','Retouching'],    year:'2024',cat:'Photography', overview:'Write your project D overview here.',thumb:null,hero:null,gallery:[],docs:[]}
+  ];
+  var cur=0;
+
+  /* ── helpers ── */
+  function g(id){return document.getElementById(id);}
+  function toast(msg){
+    var t=g('toast');t.textContent=msg;t.classList.add('on');
+    clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove('on');},2200);
+  }
+
+  /* ── reveal ── */
+  var obs=('IntersectionObserver' in window)
+    ?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});},{threshold:0,rootMargin:'0px 0px 80px 0px'})
+    :null;
+  document.querySelectorAll('.reveal').forEach(function(el){obs?obs.observe(el):el.classList.add('in');});
+
+  /* ── nav scroll ── */
+  var nav=g('nav');
+  window.addEventListener('scroll',function(){nav&&nav.classList.toggle('scrolled',window.scrollY>50);},{passive:true});
+
+  /* ── hero words ── */
+  document.querySelectorAll('.hero-word').forEach(function(w){
+    w.addEventListener('mouseenter',function(){toast(w.dataset.msg||'');});
+  });
+  var hn=g('heroName');
+  if(hn)hn.addEventListener('dblclick',function(){
+    document.querySelectorAll('.hero-word').forEach(function(w){w.classList.toggle('it');});
+    toast('Swapped!');
+  });
+
+  /* ── section label tap ── */
+  document.querySelectorAll('.sec-label').forEach(function(l){
+    l.addEventListener('click',function(){
+      var m=['Found it!','Curious!','Hello there!','You found a secret!'];
+      toast(m[Math.floor(Math.random()*m.length)]);
+    });
+  });
+
+  /* ── footer egg ── */
+  var fe=g('fegg'),fc=0;
+  if(fe){fe.style.cursor='pointer';fe.addEventListener('click',function(){fc++;if(fc===3)toast('Looking for something?');if(fc>=5){toast('Thanks for scrolling this far!');fc=0;}});}
+
+  /* ── konami ── */
+  var KS=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'],ki=0;
+  document.addEventListener('keydown',function(e){ki=(e.key===KS[ki])?ki+1:0;if(ki===KS.length){toast('Konami code! Easter egg!');ki=0;}});
+
+  /* ── open/close project ── */
+  function open(id){
+    cur=id;var p=P[id],pp=g('pp');if(!pp)return;
+    g('ppNum').textContent=p.num;
+    g('ppTitle').textContent=p.title;
+    g('ppNavTitle').textContent=p.title;
+    g('ppYear').textContent=p.year;
+    g('ppCat').textContent=p.cat;
+    g('ppOverview').textContent=p.overview;
+    g('ppTags').innerHTML=p.tags.map(function(t){return'<span class="pp-tag">'+t+'</span>';}).join('');
+    var hi=g('ppHeroImg'),he=g('ppHeroEmpty');
+    if(p.hero){hi.src=p.hero;hi.classList.add('on');if(he)he.style.display='none';}
+    else{hi.classList.remove('on');hi.src='';if(he)he.style.display='flex';}
+    renderGallery(id);renderDocs(id);
+    pp.classList.add('open');pp.scrollTop=0;
+    document.body.style.overflow='hidden';
+  }
+  function close(){var pp=g('pp');if(pp)pp.classList.remove('open');document.body.style.overflow='';}
+
+  document.querySelectorAll('.proj-card').forEach(function(c){
+    c.addEventListener('click',function(){open(+c.dataset.id);});
+    c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open(+c.dataset.id);}});
+  });
+  var pb=g('ppBack');if(pb)pb.addEventListener('click',close);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+
+  /* ── hero image upload ── */
+  var phi=g('ppHeroInput');
+  if(phi)phi.addEventListener('change',function(e){
+    var f=e.target.files[0];if(!f)return;
+    var r=new FileReader();
+    r.onload=function(ev){
+      P[cur].hero=P[cur].thumb=ev.target.result;
+      var ct=g('ct'+cur),ce=g('ce'+cur);
+      if(ct){ct.src=ev.target.result;ct.classList.add('on');}
+      if(ce)ce.style.display='none';
+      var hi=g('ppHeroImg'),he=g('ppHeroEmpty');
+      if(hi){hi.src=ev.target.result;hi.classList.add('on');}
+      if(he)he.style.display='none';
+      toast('Image uploaded!');
+    };
+    r.readAsDataURL(f);
+  });
+
+  /* ── gallery ── */
+  function galAdd(idx){
+    return '<label class="gal-add">'
+      +'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg>'
+      +'<span>Add Image</span>'
+      +'<input type="file" accept="image/*" data-i="'+idx+'">'
+      +'</label>';
+  }
+  function renderGallery(id){
+    var g2=g('ppGallery');if(!g2)return;
+    g2.innerHTML='';
+    P[id].gallery.forEach(function(src,i){
+      var d=document.createElement('div');d.className='gal-item';
+      d.innerHTML=src?'<img src="'+src+'" class="on" alt="">':galAdd(i);
+      g2.appendChild(d);
+    });
+    var a=document.createElement('div');a.className='gal-item';a.innerHTML=galAdd('n');g2.appendChild(a);
+    g2.querySelectorAll('input[type=file]').forEach(function(inp){
+      inp.addEventListener('change',function(e){
+        var f=e.target.files[0];if(!f)return;
+        var r=new FileReader();
+        r.onload=function(ev){
+          inp.dataset.i==='n'?P[cur].gallery.push(ev.target.result):P[cur].gallery[+inp.dataset.i]=ev.target.result;
+          renderGallery(cur);toast('Image added!');
+        };
+        r.readAsDataURL(f);
+      });
+    });
+  }
+
+  /* ── docs ── */
+  function renderDocs(id){
+    var dl=g('ppDocs');if(!dl)return;
+    dl.innerHTML='';
+    P[id].docs.forEach(function(doc,i){
+      var d=document.createElement('div');d.className='doc-item';
+      d.innerHTML='<div class="doc-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>'
+        +'<span class="doc-name">'+doc.name+'</span><span class="doc-size">'+doc.size+'</span>'
+        +'<button class="doc-del" data-i="'+i+'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>';
+      dl.appendChild(d);
+    });
+    dl.querySelectorAll('.doc-del').forEach(function(btn){
+      btn.addEventListener('click',function(){P[cur].docs.splice(+btn.dataset.i,1);renderDocs(cur);toast('File removed.');});
+    });
+  }
+  var pdi=g('ppDocInput');
+  if(pdi)pdi.addEventListener('change',function(e){
+    Array.from(e.target.files).forEach(function(f){
+      var kb=(f.size/1024).toFixed(0);
+      P[cur].docs.push({name:f.name,size:kb>1024?(kb/1024).toFixed(1)+' MB':kb+' KB'});
+    });
+    renderDocs(cur);toast(e.target.files.length+' file(s) uploaded!');e.target.value='';
+  });
+
+}();
+</script>
+</body>
+</html>
